@@ -8,8 +8,10 @@ $(function() {
     socket.on('disconnect', function() {
         console.log('disconnect');
     });
-    socket.on('message', function(msg) {
+    socket.on('user message', function(msg) {
+	console.log("user message!!!!!!");
         console.log(msg);
         $('#code').text(msg);
+	socket.emit('user message', $(this).val());
     });
 });

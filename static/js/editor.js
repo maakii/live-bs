@@ -15,7 +15,7 @@ $(function() {
         if (code_prev != code) {
             socket.send(code);
             code_prev = code;
-	    socket.on('message', function(msg) {
+	    socket.on('user message', function(msg) {
 		// my msg
 	    });
         }
