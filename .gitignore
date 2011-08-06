@@ -1,0 +1,10 @@
+.DS_Store
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.bak
+*~
+*.*~
+node_modules

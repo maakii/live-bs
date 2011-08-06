@@ -1,14 +1,15 @@
 <html>
   <head>
     <title>editor</title>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">google.load("jquery", "1.4.4");</script>
+    <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>    
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript">var port = <%= port %>;</script>
+    <script type="text/javascript">var hosturl = '<%= hosturl %>';</script>
     <script type="text/javascript" src="/js/editor.js"></script>
     <link href="/css/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <textarea id="code"></textarea>
+    <textarea id="sticky"></textarea>
+    <textarea id="sticky-1"></textarea>
+    <textarea id="sticky-2"></textarea>
   </body>
 </html>

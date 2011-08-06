@@ -1,0 +1,213 @@
+/**
+ * OPTIONS PAGE
+ **/
+
+html {
+	background: #ccc;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+body {
+	font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #111;
+	margin: 0;
+}
+
+a {
+	color: #1982D1;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#page {
+	max-width: 690px;
+	background: #fff;
+	margin: 0 auto;
+	box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+	border: solid 1px #ACACAC;
+	border-width: 0 1px;
+}
+
+#header, #content {
+	margin: 0 50px;
+}
+
+#nav {
+	margin: 0;
+	padding: 0 50px;
+	background: #eee;
+}
+
+#nav li {
+	list-style: none;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+#nav a {
+	color: #111;
+	font-size: 13px;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 15px 15px;
+	display: inline-block;
+}
+
+#nav a:hover, #nav a.selected {
+	background: #1982D1;
+	color: #fff;
+}
+
+h1 {
+	font-size: 30px;
+	font-weight: bold;
+	line-height: 36px;
+	padding: 50px 0;
+	margin: 0;
+}
+
+h2 {
+}
+
+p {
+	margin-bottom: 0;
+}
+
+input[type=checkbox], label {
+	cursor: pointer;
+}
+
+#save {
+	float: right;
+	padding: 5px 10px;
+	margin-top: -5px;
+	cursor: pointer;
+	border: 1px solid #c0c0c0;
+	border-radius: 3px;
+	background: #fff;
+	font-size: 30px;
+	color: #666;
+}
+
+#save:hover {
+	color: #fff;
+	background: -webkit-gradient(linear,left top,left bottom,from(#4d90fe),to(#357ae8));
+	border-color: #3079ED;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+
+#background-list {
+	margin: 0;
+	padding: 0;
+}
+
+#background-list li {
+	list-style: none;
+	margin: 0 10px 10px 0;
+	padding: 0;
+	display: inline-block;
+	background: #fff;
+	width: 164px;
+	height: 164px;
+	overflow: hidden;
+	border: 10px solid #ddd;
+	-webkit-transition: all, 200ms;
+	transition: all, 200ms;
+	cursor: pointer;
+	box-shadow: 0 1px 0 #aaa;
+	border-radius: 3px;
+}
+
+#background-list li:hover {
+	opacity: 0.8;
+}
+
+#background-list li.wood {
+	background: url('../images/wood.jpg');
+}
+#background-list li.cork {
+	background: url('../images/cork.jpg');
+}
+#background-list li.corklite {
+	background: url('../images/corklite.png');
+}
+#background-list li.sandpaper {
+	background: url('../images/sandpaper.jpg');
+}
+#background-list li.dadgineer1 {
+	background: url('../images/dadgineer1.jpg');
+	background-size: cover;
+}
+#background-list li.dadgineer2 {
+	background: url('../images/dadgineer2.jpg');
+	background-size: cover;
+}
+#background-list li.dadgineer3 {
+	background: url('../images/dadgineer3.jpg');
+}
+
+#background-path {
+	border: 1px solid #DDD;
+	padding: 5px;
+	margin-right: 10px;
+	width: 499px;
+}
+
+#background-path:hover {
+	border-color: #aaa;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+#background-update {
+	padding: 5px 10px;
+	cursor: pointer;
+	border: 1px solid #c0c0c0;
+	border-radius: 3px;
+	background: #fff;
+}
+
+#background-update:hover {
+	background: -webkit-gradient(linear,left top,left bottom,from(#F8F8F8),to(#F1F1F1)) !important;
+	border-color: #C0C0C0 !important;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+#footer {
+	padding: 30px 50px 30px;
+	background: #F9F9F9;
+	margin-top: 40px;
+	border-top: 1px solid #ddd;
+}
+
+#footer h2 {
+	margin-top: 0;
+}
+
+/**
+ * UI OVERRIDES
+ **/
+
+.ui-icon {
+	display: inline-block;
+}
+
+/**
+ * UTILITY
+ **/
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
