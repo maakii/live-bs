@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <title>Live</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">google.load("jquery", "1.4.4");</script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">var host = '<%= host %>';</script>
+    <script type="text/javascript">var port = <%= port %>;</script>
+    <script type="text/javascript" src="/js/sticky.js"></script>    
+    <script type="text/javascript" src="/js/live.js"></script>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <textarea id="code"></textarea>
+  </body>
+</html>

@@ -1,25 +1,35 @@
-$(function() {
-    //var socket = new io.Socket(null, { port: port });
-    //socket.connect();
-    var socket = io.connect('http://localhost:3000/')
-    socket.on('connect', function() {
-        console.log('connect');
-    });
-    socket.on('disconnect', function(){
-        console.log('disconnect');
+function StickyEditable(id) {
+
+  var socket = io.connect(hosturl + "/create");
+  socket.on('connect', function() {
+    /* request the connection by id */
+    socket.emit('created', {"id": id});
+    console.log('connection established:' + id);
+
+    var sticky = io.connect(hosturl + "/sticky/" + id);
+    sticky.on('connect', function() {
+      var content_prev = $('#' + id).val();
+      var update = function() {
+          var content = $('#' + id).val();
+          if (content != undefined) {
+            content = content.replace(/(\n|\r)+/g, "<br>");
+          }
+          if (content_prev != content) {
+              sticky.send(content);
+              content_prev = content;
+          }
+          timer = setTimeout(update, 100);
+      };
+      update();
     });
 
-    var code_prev = $('#code').val();
-    var loop = function() {
-        var code = $('#code').val();
-        if (code_prev != code) {
-            socket.send(code);
-            code_prev = code;
-	    socket.on('user message', function(msg) {
-		// my msg
-	    });
-        }
-        setTimeout(loop, 100);
-    };
-    loop();
-});
+  });
+
+  socket.on('disconnect', function(){
+    console.log('disconnect');
+    //cancelTimeout(timer);
+  });
+}
+
+StickyEditable(1);
+StickyEditable(2);
