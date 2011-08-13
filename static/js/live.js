@@ -1,7 +1,7 @@
 $(function() {
  // console.log(sticky.id);
 
-  console.log(sf);
+  //console.log(sf);
 /*
   var sticky = sf.create();
   sticky.id = '#code';

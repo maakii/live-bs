@@ -25,30 +25,68 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// A list structure to keep active stickies
-var stickies = (function() {
+var sticky = (function() {
     var self = {
-	init: function() {
-	    console.log("stickies.init");
-	    $('body').live({
-		'dblclick': function(event) {
-		    TOP = event.pageY;
-		    LEFT = event.pageX;
-		    sticky.create();
-		}
-	    });
-	}
-/*
-	, create: function () {
+	create: function (data) {
+	    console.log("sticky.create");
+	    data = data || {
+		id           : + new Date(), // assigned by the server
+		date         : + new Date(),
+		top          : TOP + 'px',
+		left         : LEFT + 'px',
+		title        : 'Click here to edit',
+		fontsize     : 16,
+		textcolor    : '#111',
+                notecolor    : '#ffee74', // yellow
+//              notecolor    : '#ffb4cc', // pink
+//              notecolor    : '#8ec4e1', // blue
+//              notecolor    : '#b9df87', // green
+		width        : 200
+	    };
+
+	    var $note = $('<div />', {
+		'class' : 'sticky',
+		'id': data.id
+	    })
+            .append($('<h1 />', {
+                'class' : 'sticky-title',
+                html : data.title,
+                'title' : 'Double-click to edit title'
+	    }))
+            .append($('<div />', {
+                    'class' : 'sticky-content',
+                    html : data.text,
+                    contentEditable : true
+                }).css({
+                    'font-size' : data.fontsize,
+                    'color' : data.textcolor
+                })
+            )
+	     .draggable({
+			handle		: '.sticky h1',
+			stack		: '.sticky',
+			containment	: 'body',
+			cancel		: '.sticky-content, .button, .settings, h1.edit, .grid, .ui-icon',
+			distance	: 0
+            })
+            .css({
+		position      : 'absolute',
+                'top'         : data.top,
+                'left'        : data.left,
+                'display'     : 'none',
+                'background-color' : data.notecolor,
+                'width'       : data.width
+	    })
+	    .appendTo(document.body)
+   	    .fadeIn(200);
+	    return $note;
 	},
 
 	update: function () {
 	},
 
 	discard: function () {
-	} */
+	}
     };
     return self;
 })();
-
-stickies.init();

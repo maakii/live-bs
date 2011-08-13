@@ -5,14 +5,16 @@
  */
 
 var socket = io.connect(hosturl);
+
 socket.json.send(
     {"type": "REQ",
      "ver" : 1,
      "contents": "test message"
     }
 );
+
 socket.on('message', function(data) {
-  console.log("data=" + JSON.stringify(data));
+    console.log("data=" + JSON.stringify(data));
 });
 
 var new_sticky = null;

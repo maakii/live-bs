@@ -1,3 +1,30 @@
+/*
+ * Copyright (c) 2011, Masaaki Isozu <m.isozu@gmail.com>
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of the <organization> nor the
+ *       names of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 var express = require('express');
 var path = require('path');
 var async = require('async');
@@ -22,7 +49,7 @@ var serverName = "Live-Stickies " + version + " (live-stickies.org)";
 //cache 6 hours
 exports.maxAge = 1000*60*60*6;
 
-var host = "43.15.152.213";
+var host = "localhost";
 var port = 3000;
 var hosturl = "http://" + host + ":" + port;
 
@@ -63,6 +90,12 @@ app.get('/main', function(req, res) {
     res.render('main', { locals: { hosturl: hosturl } });
 });
 
+/* start routine alternative */
+app.get('/live', function(req, res) {
+    console.log('/live');
+    res.render('live', { locals: { hosturl: hosturl } });
+});
+
 /* json list of stickies specified by theme */
 app.get('/list', function(req, res) {
     console.log('/list');
@@ -73,88 +106,19 @@ app.listen(port);
 console.log('Server running at ' + hosturl);
 
 var io  = require('socket.io').listen(app);
+//io.configure('development', function() {
 io.configure(function() {
     io.set('polling duration', 30);
-});
-
-io.configure('development', function() {
     io.set('log level', 3);
 });
 
 // Mongoose
-var Schema = mongoose.Schema;
-var StickySchema = new Schema({
-  obj: String
-});
-mongoose.model('Sticky', StickySchema);
-mongoose.connect('mongodb://localhost/sticky_db');
-
-//io.of('/message')
-io.sockets
-  .on('connection', function(socket) {
-
-    socket.on('create', function(data) {
-      console.log('create message received');
-      var obj = data.obj;
-      io.sockets.emit('created', {'obj': obj});
-      //socket.broadcast.emit('created', {'obj': obj});
-      //socket.emit('a message', {'msg': 'we are accepted'});
-      //socket.emit('created', {'obj': obj});
-    });
-
-    socket.on('update', function(data) {
-      console.log('update message received');
-      var obj = data.obj;
-      io.sockets.emit('updated', {'obj': obj});
-    });
-
-      // io.of('/sticky/' + obj.id).on('connection', function(socket) {
-      //   console.log("sticky enabled -> " + obj.id);
-      //   /* update sticky content */
-      //   socket.on('message', function(msg) {
-      //     console.log(msg + " received");
-      //     socket.broadcast.emit('user message', msg);
-      //   });
-
-      //   /* finish sticky editing */
-      //   socket.on('disconnect', function() {
-      //     console.log('disconnect');
-      //     socket.broadcast.emit('announcement', 'user disconnected');
-      //   });
-      // });
-  });
-
-// io.of('/create').on('connection', function(create) {
-//   create.on('created', function(data) {
-//     console.log("sticky assigned -> " + data.id);
-
-//     //message.emit('a message', {'msg':'hi this is test message.'});
-//     if (callback != null) {
-//       console.log(callback);
-//       callback('a message', {'msg':'hi this is test message.'});
-//     }
-
-//     /* assigned id for persistent connection */
-//     io.of('/sticky/' + data.id).on('connection', function(socket) {
-
-//       console.log("sticky enabled -> " + data.id);
-//       /* update sticky content */
-//       socket.on('message', function(msg) {
-//         console.log(msg + " received");
-//         socket.broadcast.emit('user message', msg);
-//       });
-
-//       /* finish sticky editing */
-//       socket.on('disconnect', function() {
-//         console.log('disconnect');
-//         socket.broadcast.emit('announcement', 'user disconnected');
-//       });
-//     });
-//   });
+// var Schema = mongoose.Schema;
+// var StickySchema = new Schema({
+//   obj: String
 // });
+// mongoose.model('Sticky', StickySchema);
+// mongoose.connect('mongodb://localhost/sticky_db');
 
-
-/* open stickies */
-//io.of('/open') {
-//};
-
+var router = require("./router");
+router.setSocketIO(io);
