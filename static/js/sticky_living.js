@@ -15,6 +15,7 @@ socket.on('message', function(data) {
   console.log("data=" + JSON.stringify(data));
 });
 
+// No used below
 var new_sticky = null;
 function sticky_create_bind(callback) {
   new_sticky = callback;
