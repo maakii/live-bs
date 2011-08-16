@@ -66,16 +66,16 @@ app.configure(function(){
     app.use(express.static(__dirname + '/static'));
 });
 
-/* Obsolete: */
-app.get('/editor', function(req, res) {
-    console.log('/editor');
-    res.render('editor', { locals: { hosturl: hosturl } });
-});
-/* Obsolete: */
-app.get('/viewer', function(req, res) {
-    console.log('/viewer');
-    res.render('viewer', { locals: { hosturl: hosturl } });
-});
+// /* Obsolete: */
+// app.get('/editor', function(req, res) {
+//     console.log('/editor');
+//     res.render('editor', { locals: { hosturl: hosturl } });
+// });
+// /* Obsolete: */
+// app.get('/viewer', function(req, res) {
+//     console.log('/viewer');
+//     res.render('viewer', { locals: { hosturl: hosturl } });
+// });
 
 //serve static files
 app.get('/static/*', function(req, res) { 
@@ -84,17 +84,17 @@ app.get('/static/*', function(req, res) {
     res.sendfile(filePath, { maxAge: exports.maxAge });
 });
 
-/* start routine */
-app.get('/main', function(req, res) {
-    console.log('/main');
-    res.render('main', { locals: { hosturl: hosturl } });
-});
+// /* start routine */
+// app.get('/main', function(req, res) {
+//     console.log('/main');
+//     res.render('main', { locals: { hosturl: hosturl } });
+// });
 
-/* start routine alternative */
-app.get('/live', function(req, res) {
-    console.log('/live');
-    res.render('live', { locals: { hosturl: hosturl } });
-});
+// /* start routine alternative */
+// app.get('/live', function(req, res) {
+//     console.log('/live');
+//     res.render('live', { locals: { hosturl: hosturl } });
+// });
 
 /* json list of stickies specified by theme */
 app.get('/list', function(req, res) {

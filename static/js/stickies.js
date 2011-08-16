@@ -25,28 +25,47 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// A list structure to keep active stickies
+// Manager to create or update a sticky
 var stickies = (function() {
+    var list = new Array();
     var self = {
 	init: function() {
 	    console.log("stickies.init");
 	    $('body').live({
 		'dblclick': function(event) {
-		    TOP = event.pageY;
-		    LEFT = event.pageX;
-		    sticky.create();
+		    var stk = new sticky(null, { "top": event.pageY, 
+						 "left": event.pageX });
+		    list.push(stk.id);
 		}
 	    });
+	},
+
+	// receive notification of create
+	create: function(data) {
+	    if ($.inArray(data.id, list) == -1) {
+		// if a list does not have the sticky of data.id
+		var stk = new sticky(data, null);
+	    };
+	},
+
+	// receive notification of update
+	update: function(data) {
+	    // ToDo: should divide into specific events
+	    console.log("updated #" + data.id);
+	    var div = $('#' + data.id);
+	    div.css('top', data.top);
+	    div.css('left', data.left);
+	    div.find('h1.sticky-title').html(data.title);
+	    div.find('.sticky-content').html(data.text);
+	    div.css('backgroundColor', data.notecolor);
+	},
+
+	delete: function(data) {
+	    
 	}
-/*
-	, create: function () {
-	},
-
-	update: function () {
-	},
-
-	discard: function () {
-	} */
+    /*
+      ,discard: function () {
+    } */
     };
     return self;
 })();

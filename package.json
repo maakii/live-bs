@@ -1,8 +1,8 @@
 {
   "name"            : "live-stickies",
   "version"         : "0.0.1",  
-  "description"     : "A collaborative stickies based on node.js",
-  "keywords"        : ["live-stickies", "realtime", "collaborative", "stickies"],
+  "description"     : "A live updating stickies for collaborative effort",
+  "keywords"        : ["live-stickies", "realtime", "collaborative", "sticky"],
   "private"         : "true",
   "author"          : "Masaaki Isozu <m.isozu@gmail.com>",
   "dependencies"    : {

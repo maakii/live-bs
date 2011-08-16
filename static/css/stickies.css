@@ -13,7 +13,7 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 	color: #333;
 	height: 100%;
-	background: #ccc;
+	background: #efefef;
 }
 
 a {
@@ -50,7 +50,7 @@ ul li {
 		-1px -1px 0 rgba(0, 0, 0, 0.45) inset,
 		0 2px 5px rgba(0,0,0,0.25);
 	float: left;
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(0,0,0,0.1)));
+	/* background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(0,0,0,0.1))); */
 }
 
 .sticky h1 {
@@ -70,11 +70,18 @@ ul li {
 	cursor: move;
 	padding: 5px 70px 5px 10px;
 	background-color: rgba(0,0,0,0);
+	-webkit-box-shadow:
+		0 1px 0 rgba(0, 0, 0, 0.3),
+		0 2px 0 rgba(0, 0, 0, 0.05),
+		0 3px 0 rgba(0, 0, 0, 0.05);
+
+/*
 	background-image: -webkit-gradient(linear, 0 100%, 0 0, from(rgba(0, 0, 0, 0.15)), to(rgba(0, 0, 0, 0.1)));
 	-webkit-box-shadow:
 		0 1px 0 rgba(0, 0, 0, 0.3),
 		0 2px 0 rgba(0, 0, 0, 0.05),
 		0 3px 0 rgba(0, 0, 0, 0.05);
+*/
 
 }
 
@@ -140,6 +147,12 @@ ul li {
 	background: 
 		url('custom-theme/images/ui-icons_000000_256x240.png') -80px -128px,
 		url('custom-theme/images/ui-icons_ffffff_256x240.png') -80px -127px;
+}
+
+.sticky .ui-icon-setting {
+        right: 5px;
+        background:
+	        url('../images/icon-setting-16.png') -80px -128px;
 }
 
 .sticky .sticky-content {
@@ -540,8 +553,8 @@ ul.context-menu .trash a:before {
 
 #options-dialog ul#options-notecolor li {
 	display: inline-block;
-	height: 50px;
-	width: 50px;
+	height: 30px;
+	width: 40px;
 	text-indent: -999px;
 	border: 1px solid #DDD;
 	cursor: pointer;
@@ -728,8 +741,23 @@ ul.context-menu .trash a:before {
  **/
 
 .default {
-	background-color: #ffc !important;
+	/* background-color: #ffc !important; */
+	background-color: #ffee74 !important;
 }
+.yellow {
+        background-color: #ffee74 !important;
+}
+.pink {
+        background-color: #ffb4cc !important;
+}
+.blue {
+        background-color: #8ec4e1 !important;
+}
+.green {
+        background-color: #b9df87 !important;
+}
+
+/*
 .red {
 	background-color: #FA948C !important;
 }
@@ -737,7 +765,8 @@ ul.context-menu .trash a:before {
 	background-color: #F7C47F !important;
 }
 .yellow {
-	background-color: #F5E787 !important;
+	/* background-color: #F5E787 !important; */
+        background-color: #ffee74 !important;
 }
 .green {
 	background-color: #D0E48E !important;
@@ -751,6 +780,7 @@ ul.context-menu .trash a:before {
 .gray {
 	background-color: #C5C5C6 !important;
 }
+*/
 
 /**
  * FONTS

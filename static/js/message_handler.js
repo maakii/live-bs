@@ -4,19 +4,37 @@
  *   keep the latest with the server by updating content.
  */
 
+var loc = document.location;
+var hosturl = loc.protocol + "//" + loc.host;
 var socket = io.connect(hosturl);
 
-socket.json.send(
-    {"type": "REQ",
-     "ver" : 1,
-     "contents": "test message"
-    }
-);
+function message_send(type, data) {
+    socket.json.send({
+	"type" : type,
+        "ver"  : 1,
+	"data" : data
+    });
+};
 
-socket.on('message', function(data) {
-    console.log("data=" + JSON.stringify(data));
+socket.on('message', function(message) {
+
+    if (message.type == "STICKY_CREATED") {
+	stickies.create(message.data);
+	//console.log("sticky.created: " + message.data);
+    } else if (message.type == "STICKY_UPDATED") {
+	stickies.update(message.data);
+	//console.log("sticky.updated: " + message.data);
+    } else if (message.type == "STICKY_DISCONNECT") {
+	socket.disconnect();
+    };
+    
+    //console.log("message=" + JSON.stringify(message));
 });
 
+
+
+
+// old
 var new_sticky = null;
 function sticky_create_bind(callback) {
   new_sticky = callback;
