@@ -58,6 +58,7 @@ var stickies = (function() {
 	    div.find('h1.sticky-title').html(data.title);
 	    div.find('.sticky-content').html(data.text);
 	    div.css('backgroundColor', data.notecolor);
+	    div.css('z-index', data.zindex);
 	},
 
 	delete: function(data) {

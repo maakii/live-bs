@@ -37,13 +37,14 @@ var sticky = function(data, geo, orig) {
 	date         : + (new Date()),
 	top          : geo.top + 'px',
 	left         : geo.left + 'px',
-	title        : 'Title',
-	fontsize     : 16,
+	title        : 'New Title',
+	fontsize     : 14,
 	textcolor    : '#111',
         notecolor    : '#ffee74', // yellow
 //      notecolor    : '#ffb4cc', // pink
 //      notecolor    : '#8ec4e1', // blue
 //      notecolor    : '#b9df87', // green
+	zindex      : 1,
 	width        : 200
     };
 
@@ -82,6 +83,7 @@ var sticky = function(data, geo, orig) {
             'left'        : data.left,
             'display'     : 'none',
             'background-color' : data.notecolor,
+	    'z-index'     : data.zindex,
             'width'       : data.width
 	})
 	.appendTo(document.body)
@@ -128,6 +130,13 @@ var sticky = function(data, geo, orig) {
 	data.title = $('#sticky-input-title').val();
 	div.find('h1.sticky-title').html(data.title);
 	message_send("STICKY_UPDATE", data);
+    });
+
+    $('.sticky-title').click(function() {
+	var div = $('#' + data.id);
+	data.zindex = div.css('z-index');
+	message_send("STICKY_UPDATE", data);
+	//console.log("z-index:" + data.zindex);
     });
 
     $('ul#options-notecolor li').click(function() {
