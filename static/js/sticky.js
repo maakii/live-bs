@@ -33,8 +33,8 @@
 var sticky = function(data, geo, orig) {
     console.log("sticky.create");
     data = data || {
-	id           : + (new Date()), // assigned by the server
-	date         : + (new Date()),
+	id           : + (new Date()), // almostly equals to 'date'
+	date         : + (new Date()), // create_at
 	top          : geo.top + 'px',
 	left         : geo.left + 'px',
 	title        : 'New Title',
@@ -55,7 +55,7 @@ var sticky = function(data, geo, orig) {
         .append($('<h1 />', {
             'class' : 'sticky-title',
             html : data.title,
-            'title' : 'Double-click to edit title'
+            'title' : 'Click right-above corner icon to edit title'
 	}))
         .append($('<div />', {
             'class' : 'sticky-content',
@@ -71,10 +71,10 @@ var sticky = function(data, geo, orig) {
 	    'title'	: 'Settings',
 	}))
 	.draggable({
-	    handle		: '.sticky h1',
-	    stack		: '.sticky',
+	    handle	: '.sticky h1',
+	    stack	: '.sticky',
 	    containment	: 'body',
-	    cancel		: '.sticky-content, .button, .settings, h1.edit, .grid, .ui-icon',
+	    cancel	: '.sticky-content, .button, .settings, h1.edit, .grid, .ui-icon',
 	    distance	: 0
         })
         .css({
@@ -109,7 +109,7 @@ var sticky = function(data, geo, orig) {
 	data.top = div.css('top');
 	data.left = div.css('left');
 	message_send("STICKY_UPDATE", data);
-	console.log("move: (" + event.pageX + "," + event.pageY + ")");
+	console.log("#" + data.id + " move: (" + event.pageX + "," + event.pageY + ")");
     });
 
     $('#options-dialog').dialog({
@@ -140,12 +140,15 @@ var sticky = function(data, geo, orig) {
     });
 
     $('ul#options-notecolor li').click(function() {
+	// call this n-times (n is the stickies number)
 	var id = $(this).parents('#options-dialog').attr('rel');
-	var notecolor = $(this).css('background-color');
-	$('#' + id).css('backgroundColor', notecolor);
-	data.id = id;
-	data.notecolor = notecolor;
-	message_send("STICKY_UPDATE", data);
+	if (id == data.date) {
+	    var notecolor = $(this).css('background-color');
+	    $('#' + id).css('backgroundColor', notecolor);
+	    data.id = id;
+	    data.notecolor = notecolor;
+	    message_send("STICKY_UPDATE", data);
+	}
     });
 
     $('#' + data.id + ' .ui-icon-setting').click(function() {
