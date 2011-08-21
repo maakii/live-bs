@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2011, Masaaki Isozu <m.isozu@gmail.com>
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
  *     * Neither the name of the <organization> nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -26,30 +26,30 @@
  */
 
 exports.handleMessage = function(io_, socket_, message_) {
-    var io = io_;
-    var socket = socket_;
-    var message = message_;
+  var io = io_;
+  var socket = socket_;
+  var message = message_;
 
-    if (message == null) { 
-	throw "Null message cannot be handled.";
-    };
+  if (message == null) {
+	throw 'Null message cannot be handled.';
+  }
 
-    if (!message.type) {
-	throw "No typed message cannot be handled.";
-    };
+  if (!message.type) {
+	throw 'No typed message cannot be handled.';
+  }
 
-    console.log("type=" + message.type);
+  console.log('type=' + message.type);
 
-    if (message.type == "STICKY_CREATE") {
+  if (message.type == 'STICKY_CREATE') {
 	io.sockets.emit('message', {
-	    'type': "STICKY_CREATED",
+	    'type': 'STICKY_CREATED',
 	    'data': message.data
 	});
-    } else if (message.type == "STICKY_UPDATE") {
+  } else if (message.type == 'STICKY_UPDATE') {
 
 	// broadcast event update except me
 	socket.broadcast.emit('message', {
-	    'type': "STICKY_UPDATED",
+	    'type': 'STICKY_UPDATED',
 	    'data': message.data});
 
 	/*
@@ -58,13 +58,13 @@ exports.handleMessage = function(io_, socket_, message_) {
 	    'data': message.data
 	});
 	*/
-    };
+  }
 };
 
 exports.handleDisconnect = function(io_, socket_) {
-    var io = io_;
-    var socket = socket_;
-    io.sockets.emit('message', {
-	'type': "STICKY_DISCONNECT",
+  var io = io_;
+  var socket = socket_;
+  io.sockets.emit('message', {
+	'type': 'STICKY_DISCONNECT',
 	'data': null});
 };

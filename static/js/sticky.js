@@ -125,13 +125,16 @@ var sticky = function(data, geo, orig) {
     });
 
     $('#sticky-input-title').keyup(function() {
-	data.id = $(this).parents('#options-dialog').attr('rel');
-	var div = $('#' + data.id);
-	data.title = $('#sticky-input-title').val();
-	div.find('h1.sticky-title').html(data.title);
-	message_send("STICKY_UPDATE", data);
+	var id = $(this).parents('#options-dialog').attr('rel');
+	if (id == data.date) {
+	    var div = $('#' + data.id);
+	    data.title = $('#sticky-input-title').val();
+	    div.find('h1.sticky-title').html(data.title);
+	    message_send("STICKY_UPDATE", data);
+	}
     });
 
+    // click title to rise up the sticky
     $('.sticky-title').click(function() {
 	var div = $('#' + data.id);
 	data.zindex = div.css('z-index');
