@@ -10,4 +10,6 @@
 node_modules
 live-stickies
 build
+db/*
+
 

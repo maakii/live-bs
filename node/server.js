@@ -30,7 +30,6 @@ var path = require('path');
 var async = require('async');
 var fs = require('fs');
 var ejs = require('ejs');
-var mongoose = require('mongoose');
 
 // set the git version
 var version = '';
@@ -92,13 +91,9 @@ io.configure(function() {
   io.set('log level', 3);
 });
 
-// Mongoose
-// var Schema = mongoose.Schema;
-// var StickySchema = new Schema({
-//   obj: String
-// });
-// mongoose.model('Sticky', StickySchema);
-// mongoose.connect('mongodb://localhost/sticky_db');
-
 var router = require('./router');
 router.setSocketIO(io);
+
+var mongo = require('./mongo');
+mongo.init();
+mongo.sampleDo();
