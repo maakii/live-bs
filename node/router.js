@@ -31,6 +31,7 @@ exports.setSocketIO = function(io_) {
   io.sockets.on('connection', function(socket) {
 	var handler = require('./handler');
 
+        //console.log("session id=" + socket.id);
 	socket.on('message', function(message) {
 	    handler.handleMessage(io, socket, message);
 	});
