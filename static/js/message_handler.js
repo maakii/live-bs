@@ -25,7 +25,7 @@ socket.on('message', function(message) {
 	stickies.update(message.data);
 	//console.log("sticky.updated: " + message.data);
     } else if (message.type == "STICKY_DISCONNECT") {
-	socket.disconnect();
+	//socket.disconnect();
     };
     
     //console.log("message=" + JSON.stringify(message));
